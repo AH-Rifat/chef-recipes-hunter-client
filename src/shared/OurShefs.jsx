@@ -1,5 +1,6 @@
 import { Button, Card } from 'flowbite-react';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const OurShefs = () => {
     const [chefs, setShefs] = useState([])
@@ -35,7 +36,7 @@ const OurShefs = () => {
                                             outline={true}
                                             gradientDuoTone="purpleToBlue"
                                         >
-                                            View Recipes
+                                            <Link to={`/chef-recipes/${chef.id}`}>View Recipes</Link>
                                         </Button>
                                     </div>
                                 </Card>
