@@ -5,9 +5,11 @@ import './index.css'
 import 'flowbite-react'
 import 'flowbite'
 import 'react-icons'
+import { RouterProvider } from 'react-router-dom'
+import router from './routes/Routes.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>,
 )
