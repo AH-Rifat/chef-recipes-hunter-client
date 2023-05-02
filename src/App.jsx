@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Header from './shared/Header';
 import CustomFooter from './shared/CustomFooter';
 import { Button } from 'flowbite-react';
+import OurShefs from './shared/OurShefs';
 
 function App() {
 
@@ -53,6 +54,9 @@ function App() {
           </Button>
         </div>
       </div>
+
+      {/* Our Shefs Section */}
+      <OurShefs />
 
       <CustomFooter />
     </>
