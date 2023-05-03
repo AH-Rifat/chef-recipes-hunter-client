@@ -1,10 +1,13 @@
-import { Button, Navbar } from 'flowbite-react';
+import { Avatar, Button, Navbar, Tooltip } from 'flowbite-react';
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 
 const Header = () => {
-    const user = useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext)
+    const handleLogout = () => {
+        logOut()
+    }
     return (
         <>
             <Navbar
@@ -18,27 +21,40 @@ const Header = () => {
                     </span>
                 </Navbar.Brand>
                 <div className="flex md:order-2 me-14">
-                    <Button className='me-4' gradientMonochrome="info">
-                        {
-                            user.name ? <Link to={"/login"}>Logout</Link> : <Link to={"/login"}>Login</Link>
-                        }
 
-                    </Button>
+                    {
+                        user?.displayName && <Tooltip
+                            content={user?.displayName}
+                            style="light"
+                        >
+                            <Avatar
+                                img={user?.photoURL}
+                                rounded={true}
+                            />
+                        </Tooltip>
+                    }
+
+                    {
+                        user?.displayName ?
+                            <a onClick={handleLogout}>
+                                <Button className='mx-4' gradientMonochrome="info">
+                                    Logout
+                                </Button>
+                            </a> : <Link to={"/login"}>
+                                <Button className='mx-4' gradientMonochrome="info">
+                                    Login
+                                </Button>
+                            </Link>
+                    }
+
                     <Navbar.Toggle />
                 </div>
                 <Navbar.Collapse>
-                    <Navbar.Link
-                        href="/"
-                        active={true}
-                    >
-                        <Link to={"/"}>Home</Link>
-                    </Navbar.Link>
-                    <Navbar.Link href="">
-                        <Link to={"/blogs"}>Blogs</Link>
-                    </Navbar.Link>
-                    <Navbar.Link href="">
-                        <Link to={"/about"}>About</Link>
-                    </Navbar.Link>
+
+                    <Link to={"/"}>Home</Link>
+                    <Link to={"/blogs"}>Blogs</Link>
+                    <Link to={"/about"}>About</Link>
+
                 </Navbar.Collapse>
             </Navbar>
         </>
