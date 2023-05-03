@@ -9,12 +9,12 @@ const CustomFooter = () => {
                 <div className="w-full mx-14">
                     <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
                         <div>
-                            <Footer.Brand
+                            <h1 className='font-semibold text-lg mb-6'>AH Shef Recipe</h1>
+                            {/* <Footer.Brand
                                 href="/"
-                                // src=""
-                                // alt="Flowbite Logo"
-                                name="AH Shef Recipe"
-                            />
+                                name=""
+                                className='me-10'
+                            /> */}
                         </div>
                         <div className="grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6">
                             <div>

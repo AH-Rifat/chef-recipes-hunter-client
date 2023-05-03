@@ -1,6 +1,6 @@
 import { Avatar, Button, Navbar, Tooltip } from 'flowbite-react';
 import React, { useContext } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, NavLink, Navigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 
 const Header = () => {
@@ -15,12 +15,12 @@ const Header = () => {
                 rounded={true}
                 className='shadow-2xl shadow-blue-300 mb-1'
             >
-                <Navbar.Brand href="/" className='ms-14'>
+                <Navbar.Brand href="/" className='lg:ms-14 w-32'>
                     <span className="self-center font-serif text-blue-900 whitespace-nowrap text-xl font-semibold dark:text-white">
                         AH Shef Recipe
                     </span>
                 </Navbar.Brand>
-                <div className="flex md:order-2 me-14">
+                <div className="flex md:order-2 lg:me-14">
 
                     {
                         user?.displayName && <Tooltip
@@ -51,9 +51,9 @@ const Header = () => {
                 </div>
                 <Navbar.Collapse>
 
-                    <Link to={"/"}>Home</Link>
-                    <Link to={"/blogs"}>Blogs</Link>
-                    <Link to={"/about"}>About</Link>
+                    <NavLink to={"/"} className={ ({isActive})=> isActive ? 'text-violet-800 text-lg' : 'text-lg'}>Home</NavLink>
+                    <NavLink to={"/blogs"} className={ ({isActive})=> isActive ? 'text-violet-800 text-lg' : 'text-lg'}>Blogs</NavLink>
+                    <NavLink to={"/about"} className={ ({isActive})=> isActive ? 'text-violet-800 text-lg' : 'text-lg'}>About</NavLink>
 
                 </Navbar.Collapse>
             </Navbar>
