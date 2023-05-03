@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { FaHeart } from "react-icons/fa";
 import { toast } from 'react-toastify';
 
-const Recipes = ({ id, listOfRecipes }) => {
+const Recipes = ({ listOfRecipes }) => {
     const [isFavorite, setIsFavorite] = useState(false)
     const [isFavorite1, setIsFavorite1] = useState(false)
     const [isFavorite2, setIsFavorite2] = useState(false)
@@ -39,7 +39,7 @@ const Recipes = ({ id, listOfRecipes }) => {
                             ratting
                         </div>
                         <Button
-                            onClick={() => handleFavoriteBtn("one")}
+                            onClick={() => handleFavoriteBtn(setIsFavorite(true))}
                             outline={true}
                             gradientDuoTone="purpleToBlue"
                             size="xs"
@@ -75,7 +75,7 @@ const Recipes = ({ id, listOfRecipes }) => {
                             ratting
                         </div>
                         <Button
-                            onClick={() => handleFavoriteBtn("two")}
+                            onClick={() => handleFavoriteBtn(setIsFavorite1(true))}
                             outline={true}
                             gradientDuoTone="purpleToBlue"
                             size="xs"
