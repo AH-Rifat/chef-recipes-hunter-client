@@ -1,7 +1,5 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
-import Header from '../shared/Header';
-import CustomFooter from '../shared/CustomFooter';
 import Recipes from '../shared/Recipes';
 
 const ChefRecipes = () => {
@@ -9,8 +7,6 @@ const ChefRecipes = () => {
 
     return (
         <div>
-            <Header />
-
             <div className='bg-white rounded-xl container mx-auto py-14 my-10 flex'>
                 <img src={image} alt="" className="w-96 ring-2 ms-20 rounded-xl shadow-lg shadow-violet-500" />
                 <div className='ms-20 leading-10'>
@@ -23,8 +19,7 @@ const ChefRecipes = () => {
             </div>
 
             <h1 className='text-center font-sans font-bold text-4xl my-14 text-violet-800 uppercase underline'>My Recipes</h1>
-            <Recipes listOfRecipes={listOfRecipes}></Recipes>
-            <CustomFooter />
+            <Recipes key={id} listOfRecipes={listOfRecipes}></Recipes>
         </div>
     );
 };

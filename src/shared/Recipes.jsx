@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import { FaHeart } from "react-icons/fa";
 import { toast } from 'react-toastify';
 
-const Recipes = ({ listOfRecipes }) => {
+const Recipes = ({ id, listOfRecipes }) => {
     const [isFavorite, setIsFavorite] = useState(false)
+    const [isFavorite1, setIsFavorite1] = useState(false)
+    const [isFavorite2, setIsFavorite2] = useState(false)
+
     const handleFavoriteBtn = () => {
-        toast('Your Favorite Recipes has been selected')
-        setIsFavorite(true)
+        return toast('Your Favorite Recipes has been selected')
     }
 
     return (
@@ -23,7 +25,7 @@ const Recipes = ({ listOfRecipes }) => {
                         <h1 className='font-bold mb-2 underline'>Ingredients:</h1>
 
                         {listOfRecipes[0].Ingredients.map(ingredient => {
-                            return (<ul class="w-80 mb-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                            return (<ul key={ingredient} class="w-80 mb-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">{ingredient}</li>
                             </ul>)
                         })}
@@ -37,7 +39,7 @@ const Recipes = ({ listOfRecipes }) => {
                             ratting
                         </div>
                         <Button
-                            onClick={handleFavoriteBtn}
+                            onClick={() => handleFavoriteBtn("one")}
                             outline={true}
                             gradientDuoTone="purpleToBlue"
                             size="xs"
@@ -73,11 +75,11 @@ const Recipes = ({ listOfRecipes }) => {
                             ratting
                         </div>
                         <Button
-                            onClick={handleFavoriteBtn}
+                            onClick={() => handleFavoriteBtn("two")}
                             outline={true}
                             gradientDuoTone="purpleToBlue"
                             size="xs"
-                            disabled={isFavorite}
+                            disabled={isFavorite1}
                         >
                             <FaHeart className='me-2'></FaHeart>  Favorite
                         </Button>
@@ -109,11 +111,11 @@ const Recipes = ({ listOfRecipes }) => {
                             ratting
                         </div>
                         <Button
-                            onClick={handleFavoriteBtn}
+                            onClick={() => handleFavoriteBtn(setIsFavorite2(true))}
                             outline={true}
                             gradientDuoTone="purpleToBlue"
                             size="xs"
-                            disabled={isFavorite}
+                            disabled={isFavorite2}
                         >
                             <FaHeart className='me-2'></FaHeart>  Favorite
                         </Button>

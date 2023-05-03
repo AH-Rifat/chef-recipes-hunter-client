@@ -41,7 +41,6 @@ const OurShefs = () => {
                                     </div>
                                 </Card>
                             </div>
-
                         )
                     })
                 }
