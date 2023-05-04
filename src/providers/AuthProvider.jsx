@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from '../firebase/firebase.config';
+import { Navigate } from 'react-router-dom';
 export const AuthContext = createContext(null)
 const auth = getAuth(app)
 
@@ -18,6 +19,7 @@ const AuthProvider = ({ children }) => {
             .then(result => {
                 const userData = result.user;
                 setUser(userData)
+                return <Navigate to={'/'} />
             }).catch(error => setError(error.message))
     }
 
@@ -26,6 +28,7 @@ const AuthProvider = ({ children }) => {
             .then(result => {
                 const userData = result.user;
                 setUser(userData)
+                return <Navigate to={'/'} />
             }).catch(error => setError(error.message))
     }
 

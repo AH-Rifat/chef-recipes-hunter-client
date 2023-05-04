@@ -1,12 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { Alert, FileInput, Label, TextInput } from 'flowbite-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 import { toast } from 'react-toastify';
 
 const Register = () => {
     const { createUser, updateUserProfile } = useContext(AuthContext)
     const [error, setError] = useState("")
+    const navigate = useNavigate();
 
     const handleRegistration = event => {
         event.preventDefault()
@@ -15,15 +16,22 @@ const Register = () => {
         const email = form.email.value
         const password = form.password.value
         const img = form.user_image.value
-        // console.log(img);
+
+        // user validation 
+        if (password.length < 6) {
+            setError('Your password must be at least 6 characters')
+        } else { setError('') }
+
+        if (email == '' || password == '') {
+            setError('Input fields can not be empty !')
+        }
         form.reset()
         createUser(email, password)
             .then((result) => {
                 toast.success("Successfully Done")
                 const user = result.user
-                console.log(user);
                 updateUserProfile(user, username)
-                return;
+                navigate("/")
             })
             .catch((error) => {
                 const errorMessage = error.message;
@@ -56,7 +64,7 @@ const Register = () => {
                             type="text"
                             name="username"
                             placeholder="Your Name"
-                            required={true}
+                        // required={true}
                         />
                     </div>
                     <div>
@@ -71,7 +79,7 @@ const Register = () => {
                             type="email"
                             name="email"
                             placeholder="name@example.com"
-                            required={true}
+                        // required={true}
                         />
                     </div>
                     <div>
@@ -85,7 +93,7 @@ const Register = () => {
                             id="password1"
                             type="password"
                             name="password"
-                            required={true}
+                        // required={true}
                         />
                     </div>
                     <div>
