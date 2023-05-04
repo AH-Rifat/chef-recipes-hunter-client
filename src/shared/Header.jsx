@@ -6,7 +6,7 @@ import { AuthContext } from '../providers/AuthProvider';
 const Header = () => {
     const { user, logOut } = useContext(AuthContext)
     const handleLogout = () => {
-        logOut()
+        return logOut()
     }
     return (
         <>
@@ -23,7 +23,7 @@ const Header = () => {
                 <div className="flex md:order-2 lg:me-14">
 
                     {
-                        user?.displayName && <Tooltip
+                        user && <Tooltip
                             content={user?.displayName}
                             style="light"
                         >
@@ -35,25 +35,21 @@ const Header = () => {
                     }
 
                     {
-                        user?.displayName ?
-                            <a onClick={handleLogout}>
-                                <Button className='mx-4' gradientMonochrome="info">
-                                    Logout
-                                </Button>
-                            </a> : <Link to={"/login"}>
-                                <Button className='mx-4' gradientMonochrome="info">
-                                    Login
-                                </Button>
-                            </Link>
+                        user ? <Button onClick={handleLogout} className='mx-4' gradientMonochrome="failure">
+                            Logout</Button> : <Link to={"/login"}>
+                            <Button className='mx-4' gradientMonochrome="info">
+                                Login
+                            </Button>
+                        </Link>
                     }
 
                     <Navbar.Toggle />
                 </div>
                 <Navbar.Collapse>
 
-                    <NavLink to={"/"} className={ ({isActive})=> isActive ? 'text-violet-800 text-lg' : 'text-lg'}>Home</NavLink>
-                    <NavLink to={"/blogs"} className={ ({isActive})=> isActive ? 'text-violet-800 text-lg' : 'text-lg'}>Blogs</NavLink>
-                    <NavLink to={"/about"} className={ ({isActive})=> isActive ? 'text-violet-800 text-lg' : 'text-lg'}>About</NavLink>
+                    <NavLink to={"/"} className={({ isActive }) => isActive ? 'text-violet-800 text-lg' : 'text-lg'}>Home</NavLink>
+                    <NavLink to={"/blogs"} className={({ isActive }) => isActive ? 'text-violet-800 text-lg' : 'text-lg'}>Blogs</NavLink>
+                    <NavLink to={"/about"} className={({ isActive }) => isActive ? 'text-violet-800 text-lg' : 'text-lg'}>About</NavLink>
 
                 </Navbar.Collapse>
             </Navbar>
