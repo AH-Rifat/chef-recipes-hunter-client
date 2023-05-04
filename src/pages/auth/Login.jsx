@@ -1,13 +1,16 @@
 import { Alert, Label } from 'flowbite-react';
 import React, { useContext, useState } from 'react';
 import { BsGithub, BsGoogle } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 import { toast } from 'react-toastify';
 
 const Login = () => {
     const { googleSignIn, githubSignIn, error, signInUser } = useContext(AuthContext)
+    const Navigate = useNavigate()
     const [error1, setError1] = useState("")
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/'
 
     const handleLogin = event => {
         event.preventDefault()
@@ -26,7 +29,7 @@ const Login = () => {
 
         signInUser(email, password).then((result) => {
             const user = result.user
-            console.log(user);
+            Navigate(from, { replace: true })
         })
             .catch((error) => {
                 const errorMessage = error.message;

@@ -6,7 +6,7 @@ const OurShefs = () => {
     const [chefs, setShefs] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:5000/chefs')
+        fetch('https://b7a10-chef-recipe-hunter-server-side-ah-rifat.vercel.app/chefs')
             .then(res => res.json())
             .then(data => setShefs(data))
     }, [])
