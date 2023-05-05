@@ -6,8 +6,8 @@ const CustomFooter = () => {
     return (
         <>
             <Footer className='border border-solid border-t-gray-300 py-10'>
-                <div className="w-full mx-14">
-                    <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
+                <div className="lg:w-full mx-10">
+                    <div className="grid lg:w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
                         <div>
                             <h1 className='font-semibold text-lg mb-6'>AH Shef Recipe</h1>
                             {/* <Footer.Brand
@@ -53,7 +53,7 @@ const CustomFooter = () => {
                         </div>
                     </div>
                     <Footer.Divider />
-                    <div className="w-full sm:flex sm:items-center sm:justify-between">
+                    <div className="lg:w-full sm:flex sm:items-center sm:justify-between">
                         <Footer.Copyright
                             href="#"
                             by="Copyright by AH Shaf"

@@ -20,7 +20,7 @@ const OurShefs = () => {
         <>
             <h1 className='text-center text-5xl font-mono mt-14 uppercase'>Our Shef</h1>
 
-            <div className='grid grid-cols-1 ms-4 lg:grid-cols-3 gap-8 container lg:mx-auto py-14'>
+            <div className='grid grid-cols-1 mx-4 lg:grid-cols-3 gap-8 lg:container lg:mx-auto py-14'>
                 {
                     loading ? <div className='text-right'><Spinner size="xl" /></div> :
                         chefs.map(chef => {
