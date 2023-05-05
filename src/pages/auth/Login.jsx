@@ -1,4 +1,4 @@
-import { Alert, Label } from 'flowbite-react';
+import { Label } from 'flowbite-react';
 import React, { useContext, useState } from 'react';
 import { BsGithub, BsGoogle } from 'react-icons/bs';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
@@ -6,9 +6,8 @@ import { AuthContext } from '../../providers/AuthProvider';
 import { toast } from 'react-toastify';
 
 const Login = () => {
-    const { googleSignIn, githubSignIn, error, signInUser } = useContext(AuthContext)
+    const { googleSignIn, githubSignIn, signInUser } = useContext(AuthContext)
     const Navigate = useNavigate()
-    const [error1, setError1] = useState("")
     const location = useLocation()
     const from = location.state?.from?.pathname || '/'
 
@@ -19,35 +18,46 @@ const Login = () => {
         const password = form.password.value
         form.reset()
         // user validation 
-        if (password.length < 6) {
-            setError1('Your password must be at least 6 characters')
-        } else { setError1('') }
-
         if (email == '' || password == '') {
-            setError1('Input fields can not be empty !')
+            return toast.error('Input fields can not be empty !')
         }
 
-        signInUser(email, password).then((result) => {
-            const user = result.user
+        if (password.length < 6) {
+            return toast.error('Your password must be at least 6 characters')
+        }
+
+        signInUser(email, password).then(() => {
             Navigate(from, { replace: true })
         })
             .catch((error) => {
                 const errorMessage = error.message;
-                setError1(errorMessage)
+                toast.error(errorMessage)
+            })
+    }
+    // sign with Google authentication 
+    const handleGoogleSignIn = () => {
+        googleSignIn().then(() => {
+            Navigate(from, { replace: true })
+        })
+            .catch((error) => {
+                const errorMessage = error.message;
+                toast.error(errorMessage)
+            })
+    }
+    // sign with Github authentication
+    const handleGithubSignIn = () => {
+        githubSignIn().then(() => {
+            Navigate(from, { replace: true })
+        })
+            .catch((error) => {
+                const errorMessage = error.message;
+                toast.error(errorMessage)
             })
     }
 
     return (
         <div className='w-1/3 mx-auto mt-12'>
             <div className='bg-white rounded-lg p-5'>
-                {() => toast.error(error)}
-                {
-                    error1 && <Alert
-                        color="failure"
-                    >
-                        {error1}
-                    </Alert>
-                }
                 <h1 className='text-center font-serif text-4xl font-bold text-blue-700'>Login</h1>
                 <form onSubmit={handleLogin} className="flex flex-col gap-4">
                     <div>
@@ -90,7 +100,7 @@ const Login = () => {
                 <div className='flex justify-between'>
                     <div>
                         <button class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
-                            onClick={() => googleSignIn()}
+                            onClick={handleGoogleSignIn}
                         >
                             <span class="relative flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                                 <BsGoogle className='me-3'></BsGoogle>
@@ -100,7 +110,7 @@ const Login = () => {
                     </div>
                     <div>
                         <button class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800"
-                            onClick={() => githubSignIn()}
+                            onClick={handleGithubSignIn}
                         >
                             <span class="relative flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                                 <BsGithub className='me-3'></BsGithub>

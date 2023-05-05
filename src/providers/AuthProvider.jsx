@@ -1,35 +1,25 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from '../firebase/firebase.config';
-import { Navigate } from 'react-router-dom';
 export const AuthContext = createContext(null)
 const auth = getAuth(app)
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
-    const [error, setError] = useState("")
     const [loading, setLoading] = useState(true)
 
     const GoogleProvider = new GoogleAuthProvider();
     const GithubProvider = new GithubAuthProvider();
-    const updateUserProfile = (user, username) => updateProfile(user, { displayName: username })
+    const updateUserProfile = (username, userPhoto) => updateProfile(auth.currentUser, { displayName: username, photoURL: userPhoto })
 
     const googleSignIn = () => {
-        signInWithPopup(auth, GoogleProvider)
-            .then(result => {
-                const userData = result.user;
-                setUser(userData)
-                return <Navigate to={'/'} />
-            }).catch(error => setError(error.message))
+        setLoading(true)
+        return signInWithPopup(auth, GoogleProvider)
     }
 
     const githubSignIn = () => {
-        signInWithPopup(auth, GithubProvider)
-            .then(result => {
-                const userData = result.user;
-                setUser(userData)
-                return <Navigate to={'/'} />
-            }).catch(error => setError(error.message))
+        setLoading(true)
+        return signInWithPopup(auth, GithubProvider)
     }
 
     const createUser = (email, password) => {
@@ -52,6 +42,7 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser)
             setLoading(false)
+            // console.log(currentUser);
         });
         return () => {
             return unsubscribe()
@@ -63,7 +54,6 @@ const AuthProvider = ({ children }) => {
         googleSignIn,
         githubSignIn,
         logOut,
-        error,
         loading,
         createUser,
         signInUser,
