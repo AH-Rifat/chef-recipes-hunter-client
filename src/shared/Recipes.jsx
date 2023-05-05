@@ -1,3 +1,4 @@
+import { Rating } from '@smastrom/react-rating';
 import { Button, Card } from 'flowbite-react';
 import React, { useState } from 'react';
 import { FaHeart } from "react-icons/fa";
@@ -36,7 +37,12 @@ const Recipes = ({ listOfRecipes }) => {
                     <hr />
                     <div className='flex justify-between'>
                         <div>
-                            ratting
+                            <Rating
+                                style={{ maxWidth: 100 }}
+                                readOnly
+                                orientation=""
+                                value={listOfRecipes[0].rating}
+                            />{listOfRecipes[0].rating}
                         </div>
                         <Button
                             onClick={() => handleFavoriteBtn(setIsFavorite(true))}
@@ -72,7 +78,12 @@ const Recipes = ({ listOfRecipes }) => {
                     <hr />
                     <div className='flex justify-between'>
                         <div>
-                            ratting
+                            <Rating
+                                style={{ maxWidth: 100 }}
+                                readOnly
+                                orientation=""
+                                value={listOfRecipes[1].rating}
+                            />{listOfRecipes[1].rating}
                         </div>
                         <Button
                             onClick={() => handleFavoriteBtn(setIsFavorite1(true))}
@@ -108,7 +119,12 @@ const Recipes = ({ listOfRecipes }) => {
                     <hr />
                     <div className='flex justify-between'>
                         <div>
-                            ratting
+                            <Rating
+                                style={{ maxWidth: 100 }}
+                                readOnly
+                                orientation=""
+                                value={listOfRecipes[2].rating}
+                            />{listOfRecipes[2].rating}
                         </div>
                         <Button
                             onClick={() => handleFavoriteBtn(setIsFavorite2(true))}

@@ -10,6 +10,7 @@ import router from './routes/Routes.jsx'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import AuthProvider from './providers/AuthProvider.jsx'
+import '@smastrom/react-rating/style.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
